@@ -9,6 +9,7 @@
 
 #include "config.hpp"
 
+// DO NOT MODIFY!!!  
 
 /*Board Size, Don't change!*/
 #define BOARD_H 6
