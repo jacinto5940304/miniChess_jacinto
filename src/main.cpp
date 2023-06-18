@@ -77,7 +77,7 @@ State* State::next_state(Move move){
   Point from = move.first, to = move.second;
   
   int8_t moved = next.board[this->player][from.first][from.second];
-  //promotion for pawn
+  // promotion for pawn
   if(moved == 1 && (to.first==BOARD_H-1 || to.first==0)){
     moved = 5;
   }
@@ -91,6 +91,7 @@ State* State::next_state(Move move){
   State* next_state = new State(next, 1-this->player);
   
   if(this->game_state != WIN)
+  // generate all the possible move stored in the
     next_state->get_legal_actions();
   return next_state;
 }

@@ -11,9 +11,59 @@
  * 
  * @return int 
  */
+
+// A piece in a different place has a different value[upgrade].
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int Boardvalue = 0;
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1 - this->player];
+
+  int now_piece, oppn_piece;
+  for(int i=0; i<BOARD_H; i+=1){
+    for(int j=0; j<BOARD_W; j+=1){
+      if((now_piece=self_board[i][j])){
+        switch(now_piece){
+          case 1: // pawn
+            Boardvalue += 2;
+            break;
+          case 2: // rook
+            Boardvalue += 6;
+            break;
+          case 3: // knight
+            Boardvalue += 7;
+            break;  
+          case 4: // bishop
+            Boardvalue += 8;
+            break;
+          case 5: // queen
+            Boardvalue += 20;
+            break;
+        }
+      }
+      if((oppn_piece=oppn_board[i][j])){
+        switch(oppn_piece){
+          case 1: // pawn
+            Boardvalue -= 2;
+            break;
+          case 2: // rook
+            Boardvalue -= 6;
+            break;
+          case 3: // knight
+            Boardvalue -= 7;
+            break;  
+          case 4: // bishop
+            Boardvalue -= 8;
+            break;
+          case 5: // queen
+            Boardvalue -= 20;
+            break;
+        }
+      }
+    }
+  }
+
+  return Boardvalue;
 }
 
 
@@ -28,19 +78,20 @@ State* State::next_state(Move move){
   Point from = move.first, to = move.second;
   
   int8_t moved = next.board[this->player][from.first][from.second];
-  //promotion for pawn
+  // promotion for pawn
   if(moved == 1 && (to.first==BOARD_H-1 || to.first==0)){
     moved = 5;
   }
+  // eaten away
   if(next.board[1-this->player][to.first][to.second]){
     next.board[1-this->player][to.first][to.second] = 0;
   }
-  
+  // moved away
   next.board[this->player][from.first][from.second] = 0;
   next.board[this->player][to.first][to.second] = moved;
   
   State* next_state = new State(next, 1-this->player);
-  
+  // generate all the possible move stored in the legal_actions
   if(this->game_state != WIN)
     next_state->get_legal_actions();
   return next_state;
