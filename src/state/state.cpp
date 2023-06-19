@@ -25,38 +25,44 @@ int State::evaluate(){
       if((now_piece=self_board[i][j])){
         switch(now_piece){
           case 1: // pawn
-            Boardvalue += 2;
+            Boardvalue += 1;
             break;
           case 2: // rook
-            Boardvalue += 6;
+            Boardvalue += 4;
             break;
           case 3: // knight
-            Boardvalue += 7;
+            Boardvalue += 3;
             break;  
           case 4: // bishop
-            Boardvalue += 8;
+            Boardvalue += 3;
             break;
           case 5: // queen
-            Boardvalue += 20;
+            Boardvalue += 9;
+            break;
+          case 6:
+            Boardvalue += 900;
             break;
         }
       }
       if((oppn_piece=oppn_board[i][j])){
         switch(oppn_piece){
           case 1: // pawn
-            Boardvalue -= 2;
+            Boardvalue -= 1;
             break;
           case 2: // rook
-            Boardvalue -= 6;
+            Boardvalue -= 4;
             break;
           case 3: // knight
-            Boardvalue -= 7;
+            Boardvalue -= 3;
             break;  
           case 4: // bishop
-            Boardvalue -= 8;
+            Boardvalue -= 3;
             break;
           case 5: // queen
-            Boardvalue -= 20;
+            Boardvalue -= 9;
+            break;
+          case 6:
+            Boardvalue -= 900;
             break;
         }
       }
