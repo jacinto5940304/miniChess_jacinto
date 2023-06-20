@@ -30,7 +30,7 @@ int State::evaluate(){
             self_value += 10;
             break;
           case 2: // rook
-            self_value += 40;
+            self_value += 50;
             break;
           case 3: // knight
             self_value += 30;
@@ -52,7 +52,7 @@ int State::evaluate(){
             oppn_value += 10;
             break;
           case 2: // rook
-            oppn_value += 40;
+            oppn_value += 50;
             break;
           case 3: // knight
             oppn_value += 30;
