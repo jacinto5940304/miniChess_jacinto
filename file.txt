@@ -1,0 +1,5 @@
+./build/main ./build/player_miniMax  ./baselines/mac-arm/baseline2
+./build/main ./build/player_miniMax  ./baselines/mac-arm/baseline1
+./build/main ./build/player_miniMax  ./build/player_random
+./build/main ./baselines/mac-arm/baseline1  ./build/player_miniMax
+./build/main ./baselines/mac-arm/baseline2  ./build/player_miniMax

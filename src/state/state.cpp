@@ -14,10 +14,12 @@
 
 // A piece in a different place has a different value[upgrade].
 int State::evaluate(){
+  // this->board.board[this->player] might not be the player
   // [TODO] design your own evaluation function
-  int Boardvalue = 0;
-  auto self_board = this->board.board[this->player];
-  auto oppn_board = this->board.board[1 - this->player];
+  int self_value = 0;
+  int oppn_value = 0;
+  auto self_board = this->board.board[0];
+  auto oppn_board = this->board.board[1];
 
   int now_piece, oppn_piece;
   for(int i=0; i<BOARD_H; i+=1){
@@ -25,51 +27,51 @@ int State::evaluate(){
       if((now_piece=self_board[i][j])){
         switch(now_piece){
           case 1: // pawn
-            Boardvalue += 1;
+            self_value += 10;
             break;
           case 2: // rook
-            Boardvalue += 4;
+            self_value += 40;
             break;
           case 3: // knight
-            Boardvalue += 3;
+            self_value += 30;
             break;  
           case 4: // bishop
-            Boardvalue += 3;
+            self_value += 30;
             break;
           case 5: // queen
-            Boardvalue += 9;
+            self_value += 90;
             break;
           case 6:
-            Boardvalue += 900;
+            self_value += 9000;
             break;
         }
       }
       if((oppn_piece=oppn_board[i][j])){
         switch(oppn_piece){
           case 1: // pawn
-            Boardvalue -= 1;
+            oppn_value += 10;
             break;
           case 2: // rook
-            Boardvalue -= 4;
+            oppn_value += 40;
             break;
           case 3: // knight
-            Boardvalue -= 3;
+            oppn_value += 30;
             break;  
           case 4: // bishop
-            Boardvalue -= 3;
+            oppn_value += 30;
             break;
           case 5: // queen
-            Boardvalue -= 9;
+            oppn_value += 90;
             break;
           case 6:
-            Boardvalue -= 900;
+            oppn_value += 9000;
             break;
         }
       }
     }
   }
 
-  return Boardvalue;
+  return self_value-oppn_value;
 }
 
 
